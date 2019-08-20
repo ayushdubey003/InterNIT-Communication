@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "266321525577",
+    "firebase_url": "https://internit-communication.firebaseio.com",
+    "project_id": "internit-communication",
+    "storage_bucket": "internit-communication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266321525577:android:d91845f347e0ba5b",
+        "android_client_info": {
+          "package_name": "com.nitconclave.internitcommunication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "266321525577-1q6chtom266m776878nvar1os1irfbs5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nitconclave.internitcommunication",
+            "certificate_hash": "c18e76f00583c03f10cf2ead8ff4803feaa16f24"
+          }
+        },
+        {
+          "client_id": "266321525577-ffarquu4os95bkiemc47opqcggvcd0jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHRR9VsydYfRhWUHNINON8Eh0rV9c4byA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "266321525577-ffarquu4os95bkiemc47opqcggvcd0jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,8 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Drawable> mLogos;
     private int currIndex;
     private final String LOG_TAG = "Main";
-    private Animation mFadeOut;
-    private Animation mFadeIn;
+    private EditText mEditText;
+    private ImageView mErrorImageView;
+    private ImageView mLogin;
+    private TextView mLoginText;
+    private ProgressBar mLoginProgress;
+    private TextView mSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +46,15 @@ public class MainActivity extends AppCompatActivity {
         mAppConstants = new AppConstants(this);
         mLogos = mAppConstants.getLogos();
         currIndex = 0;
+        mEditText = findViewById(R.id.email);
+        mErrorImageView = findViewById(R.id.error);
+        mLogin = findViewById(R.id.button);
+        mLoginText = findViewById(R.id.button_text);
+        mLoginProgress = findViewById(R.id.button_progress);
+        mSignUp = findViewById(R.id.sign_up);
+
         updateLogo();
+
     }
 
     private void updateLogo() {
