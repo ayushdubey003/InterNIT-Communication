@@ -126,6 +126,7 @@
             android:fontFamily="@font/ptsans"
             android:gravity="center"
             android:text="Not a member ? Sign Up here!"
+            android:clickable="true"
             android:textColor="#43464b"
             android:textSize="18sp"
             android:textStyle="bold"

@@ -10,10 +10,14 @@ public class AppConstants {
 
     private ArrayList<Drawable> logos;
     private HashMap<String, String> shortForms;
+    private ArrayList<String> nitNames;
+    private ArrayList<String > domains;
 
     AppConstants(Context context) {
         logos = new ArrayList<>();
         shortForms = new HashMap<>();
+        nitNames = new ArrayList<>();
+        domains = new ArrayList<>();
 
         logos.add(context.getDrawable(R.drawable.agartala));
         logos.add(context.getDrawable(R.drawable.allahabad));
@@ -79,6 +83,69 @@ public class AppConstants {
         shortForms.put("nituk", "uttarakhand$30");
         shortForms.put("nitanp", "andhra$3");
 
+        nitNames.add("NIT Agartala");
+        nitNames.add("NIT Allahabad");
+        nitNames.add("NIT Andhra Pradesh");
+        nitNames.add("NIT Arunachal Pradesh");
+        nitNames.add("NIT Bhopal");
+        nitNames.add("NIT Calicut");
+        nitNames.add("NIT Delhi");
+        nitNames.add("NIT Durgapur");
+        nitNames.add("NIT Goa");
+        nitNames.add("NIT Hamirpur");
+        nitNames.add("NIT Jaipur");
+        nitNames.add("NIT Jalandhar");
+        nitNames.add("NIT Jamshedpur");
+        nitNames.add("NIT Karnataka");
+        nitNames.add("NIT Kurukshetra");
+        nitNames.add("NIT Manipur");
+        nitNames.add("NIT Meghalaya");
+        nitNames.add("NIT Mizoram");
+        nitNames.add("NIT Nagaland");
+        nitNames.add("NIT Nagpur");
+        nitNames.add("NIT Patna");
+        nitNames.add("NIT Puducherry");
+        nitNames.add("NIT Raipur");
+        nitNames.add("NIT Rourkela");
+        nitNames.add("NIT Sikkim");
+        nitNames.add("NIT Silchar");
+        nitNames.add("NIT Srinagar");
+        nitNames.add("NIT Surat");
+        nitNames.add("NIT Trichy");
+        nitNames.add("NIT Uttarakhand");
+        nitNames.add("NIT Warangal");
+
+        domains.add("nita");
+        domains.add("mnnit");
+        domains.add("nitanp");
+        domains.add("nitap");
+        domains.add("manit");
+        domains.add("nitc");
+        domains.add("nitd");
+        domains.add("nitdgp");
+        domains.add("nitg");
+        domains.add("nith");
+        domains.add("mnit");
+        domains.add("nitj");
+        domains.add("nitjsr");
+        domains.add("nitk");
+        domains.add("nitkkr");
+        domains.add("nitmn");
+        domains.add("nitm");
+        domains.add("nitmz");
+        domains.add("nitn");
+        domains.add("vnit");
+        domains.add("nitp");
+        domains.add("nitpy");
+        domains.add("nitrr");
+        domains.add("nitrkl");
+        domains.add("nitskm");
+        domains.add("nits");
+        domains.add("nitsri");
+        domains.add("svnit");
+        domains.add("nitt");
+        domains.add("nituk");
+        domains.add("nitw");
     }
 
     public ArrayList<Drawable> getLogos() {
@@ -87,5 +154,13 @@ public class AppConstants {
 
     public HashMap<String, String> getShortForms() {
         return shortForms;
+    }
+
+    public ArrayList<String> getNitNames() {
+        return nitNames;
+    }
+
+    public ArrayList<String> getDomains() {
+        return domains;
     }
 }

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean mValidEmail;
     private HashMap<String, String> mDomains;
     private CoordinatorLayout mCoordinator;
+    private boolean update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mVerified = false;
         mDomains = mAppConstants.getShortForms();
         mCoordinator = findViewById(R.id.coordinator);
+        update = true;
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -78,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 mValidEmail = !TextUtils.isEmpty(charSequence) && Patterns.EMAIL_ADDRESS.matcher(charSequence).matches();
@@ -122,11 +126,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        
+        mSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+            }
+        });
         updateLogo();
     }
 
     private void updateLogo() {
+        if (!update)
+            return;
         if (currIndex >= mLogos.size())
             currIndex = 0;
         mImageView.setImageDrawable(mLogos.get(currIndex++));
