@@ -25,6 +25,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<String, String> mDomains;
     private CoordinatorLayout mCoordinator;
     private boolean update;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Initialization
+        FirebaseApp.initializeApp(this);
         mImageView = findViewById(R.id.logo);
         mAppConstants = new AppConstants(this);
         mLogos = mAppConstants.getLogos();
@@ -74,6 +84,9 @@ public class MainActivity extends AppCompatActivity {
         mDomains = mAppConstants.getShortForms();
         mCoordinator = findViewById(R.id.coordinator);
         update = true;
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFirebaseDatabase.getReference().child("users");
+        mAuth = FirebaseAuth.getInstance();
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -129,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
             }
         });
         updateLogo();
@@ -147,5 +160,13 @@ public class MainActivity extends AppCompatActivity {
                 updateLogo();
             }
         }, 2500);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int x = getIntent().getIntExtra("newuser", 0);
+        if (x == 1)
+            Snackbar.make(mCoordinator, "Please verify your email and sign in !", Snackbar.LENGTH_LONG).show();
     }
 }
