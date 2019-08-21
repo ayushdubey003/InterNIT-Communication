@@ -218,7 +218,7 @@ public class SignUpActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mButton.setClickable(false);
+                mButton.setEnabled(false);
                 mName = mNameText.getText().toString();
                 if (mConfirmErr || mPasswordErr || mEmailErr || mName.length() <= 0) {
                     Snackbar.make(mCoordinator, "Please check Entered Details!", Snackbar.LENGTH_LONG).show();
@@ -249,7 +249,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                     if (!task.isSuccessful()) {
                                                         Snackbar.make(mCoordinator, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
                                                         mButtonText.setVisibility(View.VISIBLE);
-                                                        mButton.setClickable(true);
+                                                        mButton.setEnabled(true);
                                                         mProgress.setVisibility(View.GONE);
                                                     } else {
                                                         Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
@@ -262,7 +262,7 @@ public class SignUpActivity extends AppCompatActivity {
                                         } else {
                                             Snackbar.make(mCoordinator, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
                                             mButtonText.setVisibility(View.VISIBLE);
-                                            mButton.setClickable(true);
+                                            mButton.setEnabled(true);
                                             mProgress.setVisibility(View.GONE);
                                         }
                                     }
@@ -270,7 +270,7 @@ public class SignUpActivity extends AppCompatActivity {
                             } else {
                                 Snackbar.make(mCoordinator, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
                                 mButtonText.setVisibility(View.VISIBLE);
-                                mButton.setClickable(true);
+                                mButton.setEnabled(true);
                                 mProgress.setVisibility(View.GONE);
                             }
                         }
