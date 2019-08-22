@@ -201,6 +201,10 @@ public class MainActivity extends AppCompatActivity {
                     mLoginText.setVisibility(View.GONE);
                     mLoginProgress.setVisibility(View.VISIBLE);
                     if (detectInternet()) {
+                        String val[]=mEmail.split("@");
+                        val[0]=val[0].toUpperCase();
+                        mEmail=val[0]+"@"+val[1];
+                        Log.e(LOG_TAG,mEmail);
                         mDatabaseReference.child(mCollegeName).child(Encryptor.GenerateSecret(mEmail)).addValueEventListener(mValueEventListener = new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -257,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 displayScreenOne();
             }
         });
-        
+
         mLogin.setEnabled(true);
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
