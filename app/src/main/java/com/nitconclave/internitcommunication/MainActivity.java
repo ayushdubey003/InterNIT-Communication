@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar mProgress;
     private ImageView mBack;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (mUser != null) {
+            startActivity(new Intent(MainActivity.this, UserActivity.class));
+            return;
+        }
         int x = getIntent().getIntExtra("newuser", 0);
         if (x == 1)
             Snackbar.make(mCoordinator, "Please verify your email and sign in !", Snackbar.LENGTH_LONG).show();
@@ -201,10 +207,10 @@ public class MainActivity extends AppCompatActivity {
                     mLoginText.setVisibility(View.GONE);
                     mLoginProgress.setVisibility(View.VISIBLE);
                     if (detectInternet()) {
-                        String val[]=mEmail.split("@");
-                        val[0]=val[0].toUpperCase();
-                        mEmail=val[0]+"@"+val[1];
-                        Log.e(LOG_TAG,mEmail);
+                        String val[] = mEmail.split("@");
+                        val[0] = val[0].toUpperCase();
+                        mEmail = val[0] + "@" + val[1];
+                        Log.e(LOG_TAG, mEmail);
                         mDatabaseReference.child(mCollegeName).child(Encryptor.GenerateSecret(mEmail)).addValueEventListener(mValueEventListener = new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -286,10 +292,12 @@ public class MainActivity extends AppCompatActivity {
                                         resendVerificationMail(authResult.getUser());
                                     else {
                                         mUser = authResult.getUser();
-                                        Log.e(LOG_TAG, mUser.getUid());
                                         mLogin.setEnabled(true);
                                         mLoginProgress.setVisibility(View.GONE);
                                         mLoginText.setVisibility(View.VISIBLE);
+                                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                                        startActivity(intent);
+                                        finish();
                                     }
                                 }
                             });
