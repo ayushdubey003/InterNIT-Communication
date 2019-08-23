@@ -16,6 +16,12 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.nitconclave.internitcommunication.Helpers.AppConstants;
 import com.nitconclave.internitcommunication.Models.User;
 import com.nitconclave.internitcommunication.R;
@@ -33,6 +39,13 @@ public class UserActivity extends AppCompatActivity {
     private String mSecret;
     private AppConstants mAppConstants;
     private SharedPreferences mSharedPrefs;
+    private FirebaseUser mFirebaseUser;
+    private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mDatabase;
+    private FirebaseStorage mFirebaseStorage;
+    private StorageReference mStorageRef;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -48,6 +61,10 @@ public class UserActivity extends AppCompatActivity {
         mSharedPrefs = getSharedPreferences(mAppConstants.mPrefsName, Context.MODE_PRIVATE);
         mSecret = mAppConstants.getmSecret();
         mUser = mAppConstants.getmUser();
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mDatabase.getReference();
+        mFirebaseStorage = FirebaseStorage.getInstance();
+        mStorageRef = mFirebaseStorage.getReference();
 
         if (mUser != null)
             Log.e(LOG_TAG, mUser.getmName() + mUser.getmEmail());
