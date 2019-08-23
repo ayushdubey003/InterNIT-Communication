@@ -20,13 +20,10 @@ public class AppConstants {
     private HashMap<String, String> shortForms;
     private ArrayList<String> nitNames;
     private ArrayList<String> domains;
-<<<<<<< Updated upstream:app/src/main/java/com/nitconclave/internitcommunication/Helpers/AppConstants.java
     private String mSecret;
     private User mUser;
-    private ArrayList<String> interests;
-=======
     private HashMap<String, ArrayList<String>> interests;
->>>>>>> Stashed changes:app/src/main/java/com/nitconclave/internitcommunication/AppConstants.java
+
     public SharedPreferences mSharedPreferences;
     public final String mPrefsName = "loginDetails";
 
@@ -36,12 +33,9 @@ public class AppConstants {
         shortForms = new HashMap<>();
         nitNames = new ArrayList<>();
         domains = new ArrayList<>();
-<<<<<<< Updated upstream:app/src/main/java/com/nitconclave/internitcommunication/Helpers/AppConstants.java
         mUser = new User();
         mSharedPreferences = context.getSharedPreferences(mPrefsName, Context.MODE_PRIVATE);
-=======
         interests = new HashMap<>();
->>>>>>> Stashed changes:app/src/main/java/com/nitconclave/internitcommunication/AppConstants.java
 
         logos.add(context.getDrawable(R.drawable.agartala));
         logos.add(context.getDrawable(R.drawable.allahabad));
