@@ -8,4 +8,9 @@
         <item name="colorAccent">#a9a9a9</item>
     </style>
 
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/ptsans</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
