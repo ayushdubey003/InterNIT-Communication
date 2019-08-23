@@ -3,6 +3,7 @@ package com.nitconclave.internitcommunication.Activities;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView mForgot;
     private ProgressBar mProgress;
     private ImageView mBack;
+    private ConstraintLayout mC1;
+    private ConstraintLayout mC2;
+    private ImageView mLogo1;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -107,8 +111,27 @@ public class MainActivity extends AppCompatActivity {
         mForgot = findViewById(R.id.forgot);
         mProgress = findViewById(R.id.forgot_progress);
         mBack = findViewById(R.id.back);
-
+        mC1 = findViewById(R.id.constraintLayout1);
+        mC2 = findViewById(R.id.constraintLayout2);
+        mLogo1 = findViewById(R.id.logo1);
+        mLogos = new AppConstants(this).getLogos();
+        updateLogo1(12);
         displayScreenOne();
+    }
+
+    private void updateLogo1(int ind) {
+        if (!update)
+            return;
+        if (ind >= mLogos.size())
+            ind = 0;
+        mLogo1.setImageDrawable(mLogos.get(ind++));
+        final int ind1 = ind;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateLogo1(ind1);
+            }
+        }, 1000);
     }
 
     private void updateLogo() {
@@ -128,6 +151,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        int y = getIntent().getIntExtra("newuser", 0);
+        if (y == 1) {
+            Snackbar.make(mCoordinator, "Please verify your email and sign in !", Snackbar.LENGTH_LONG).show();
+            mC2.setVisibility(View.VISIBLE);
+            mC1.setVisibility(View.GONE);
+            return;
+        }
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null) {
             mEmail = mUser.getEmail();
@@ -176,9 +207,8 @@ public class MainActivity extends AppCompatActivity {
             });
             return;
         }
-        int x = getIntent().getIntExtra("newuser", 0);
-        if (x == 1)
-            Snackbar.make(mCoordinator, "Please verify your email and sign in !", Snackbar.LENGTH_LONG).show();
+        mC2.setVisibility(View.VISIBLE);
+        mC1.setVisibility(View.GONE);
     }
 
     private boolean detectInternet() {
@@ -331,8 +361,8 @@ public class MainActivity extends AppCompatActivity {
                                         mLogin.setEnabled(true);
                                         mLoginProgress.setVisibility(View.GONE);
                                         mLoginText.setVisibility(View.VISIBLE);
-                                        if (mUserDetails != null) {
-                                            mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
+                                        mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
+                                        if (!mUserDetails.ismInterests()) {
                                             final Intent intent = new Intent(MainActivity.this, UserActivity.class);
                                             mUserDetails.setmInterests();
                                             mDatabaseReference.child(mCollegeName).child(secret).setValue(mUserDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -344,7 +374,8 @@ public class MainActivity extends AppCompatActivity {
                                                     finish();
                                                 }
                                             });
-                                        }
+                                        } else
+                                            startActivity(new Intent(MainActivity.this, DisplayActivity.class));
                                     }
                                 }
                             });
