@@ -7,6 +7,9 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.gson.Gson;
+import com.nitconclave.internitcommunication.Models.User;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,8 +19,11 @@ public class AppConstants {
     private HashMap<String, String> shortForms;
     private ArrayList<String> nitNames;
     private ArrayList<String> domains;
+    private String mSecret;
+    private User mUser;
     private ArrayList<String> interests;
     public SharedPreferences mSharedPreferences;
+    public final String mPrefsName = "loginDetails";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     AppConstants(Context context) {
@@ -25,6 +31,8 @@ public class AppConstants {
         shortForms = new HashMap<>();
         nitNames = new ArrayList<>();
         domains = new ArrayList<>();
+        mUser = new User();
+        mSharedPreferences = context.getSharedPreferences(mPrefsName, Context.MODE_PRIVATE);
 
         logos.add(context.getDrawable(R.drawable.agartala));
         logos.add(context.getDrawable(R.drawable.allahabad));
@@ -171,5 +179,33 @@ public class AppConstants {
 
     public ArrayList<String> getDomains() {
         return domains;
+    }
+
+    public void setmSecret(String mSecret) {
+        this.mSecret = mSecret;
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("UserSecret", mSecret);
+        editor.apply();
+    }
+
+    public void setmUser(User mUser) {
+        this.mUser = mUser;
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(mUser);
+        editor.putString("User", json);
+        editor.apply();
+    }
+
+    public String getmSecret() {
+        mSecret = mSharedPreferences.getString("UserSecret", "Error");
+        return mSecret;
+    }
+
+    public User getmUser() {
+        Gson gson = new Gson();
+        String json = mSharedPreferences.getString("User", "");
+        mUser = gson.fromJson(json, User.class);
+        return mUser;
     }
 }

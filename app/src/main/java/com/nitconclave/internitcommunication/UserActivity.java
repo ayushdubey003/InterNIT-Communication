@@ -1,16 +1,23 @@
 package com.nitconclave.internitcommunication;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.nitconclave.internitcommunication.Models.User;
 
 public class UserActivity extends AppCompatActivity {
 
@@ -20,7 +27,13 @@ public class UserActivity extends AppCompatActivity {
     private Uri mImageUri;
     private ImageView mCircleBg;
     private AutoCompleteTextView mAuto;
+    private final String LOG_TAG = "UserActivity";
+    private User mUser;
+    private String mSecret;
+    private AppConstants mAppConstants;
+    private SharedPreferences mSharedPrefs;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +43,14 @@ public class UserActivity extends AppCompatActivity {
         mProfilePhoto = findViewById(R.id.profile_image);
         mCircleBg = findViewById(R.id.circle_bg);
         mAuto = findViewById(R.id.auto);
+        mAppConstants = new AppConstants(this);
+        mSharedPrefs = getSharedPreferences(mAppConstants.mPrefsName, Context.MODE_PRIVATE);
+        mSecret = mAppConstants.getmSecret();
+        mUser = mAppConstants.getmUser();
+
+        if (mUser != null)
+            Log.e(LOG_TAG, mUser.getmName() + mUser.getmEmail());
+        Log.e(LOG_TAG, mSecret);
 
         mUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override

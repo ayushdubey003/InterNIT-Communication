@@ -136,7 +136,44 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         if (mUser != null) {
-            startActivity(new Intent(MainActivity.this, UserActivity.class));
+            mEmail = mUser.getEmail();
+            String val[] = mEmail.split("@");
+            val[0] = val[0].toUpperCase();
+            mEmail = val[0] + "@" + val[1];
+            String x[] = val[1].split("\\.");
+            int co = 0;
+            Log.e(LOG_TAG, x[0]);
+            for (int i = 0; i < mAppConstants.getDomains().size(); i++) {
+                if (x[0].equalsIgnoreCase(mAppConstants.getDomains().get(i))) {
+                    co = i;
+                    break;
+                }
+            }
+            mCollegeName = mAppConstants.getNitNames().get(co);
+            Log.e(LOG_TAG, mCollegeName);
+            final String secret = Encryptor.GenerateSecret(mEmail);
+            mDatabaseReference.child(mCollegeName).child(secret).addValueEventListener(mValueEventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mUserDetails = dataSnapshot.getValue(User.class);
+                    if (mUserDetails != null) {
+                        mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
+                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+//                        intent.putExtra("user", mUserDetails);
+//                        intent.putExtra("secret", secret);
+//                        Log.e(LOG_TAG, mUserDetails.getmName() + mUserDetails.getmEmail());
+                        mAppConstants.setmSecret(secret);
+                        mAppConstants.setmUser(mUserDetails);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
             return;
         }
         int x = getIntent().getIntExtra("newuser", 0);
@@ -210,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
                         String val[] = mEmail.split("@");
                         val[0] = val[0].toUpperCase();
                         mEmail = val[0] + "@" + val[1];
-                        Log.e(LOG_TAG, mEmail);
                         mDatabaseReference.child(mCollegeName).child(Encryptor.GenerateSecret(mEmail)).addValueEventListener(mValueEventListener = new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -219,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                                     mDatabaseReference.child(mCollegeName).removeEventListener(mValueEventListener);
                                     mLoginProgress.setVisibility(View.GONE);
                                     mLoginText.setVisibility(View.VISIBLE);
-                                    displayScreenTwo();
+                                    displayScreenTwo(Encryptor.GenerateSecret(mEmail));
                                 } else {
                                     Snackbar.make(mCoordinator, "No such user exists !", Snackbar.LENGTH_LONG).show();
                                     mDatabaseReference.child(mCollegeName).removeEventListener(mValueEventListener);
@@ -252,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         updateLogo();
     }
 
-    private void displayScreenTwo() {
+    private void displayScreenTwo(final String secret) {
         mForgot.setVisibility(View.VISIBLE);
         mLoginText.setText("Log In");
         String genericText = "Hey " + mUserDetails.getmName();
@@ -295,8 +331,14 @@ public class MainActivity extends AppCompatActivity {
                                         mLogin.setEnabled(true);
                                         mLoginProgress.setVisibility(View.GONE);
                                         mLoginText.setVisibility(View.VISIBLE);
-                                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                                        startActivity(intent);
+                                        if (mUserDetails != null) {
+                                            mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
+                                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                                            mAppConstants.setmSecret(secret);
+                                            mAppConstants.setmUser(mUserDetails);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                         finish();
                                     }
                                 }

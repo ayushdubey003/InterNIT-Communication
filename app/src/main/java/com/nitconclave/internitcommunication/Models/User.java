@@ -1,12 +1,16 @@
 package com.nitconclave.internitcommunication.Models;
 
-import java.util.ArrayList;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class User {
+import java.util.ArrayList;
+import java.util.List;
+
+public class User implements Parcelable {
     private String mEmail;
     private String mName;
     private String mProfileUrl;
-    private ArrayList<Integer> mList;
+    private List<Integer> mList=new ArrayList<>();
 
     public User() {
 
@@ -16,7 +20,7 @@ public class User {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
-        this.mList = mList;
+        //this.mList = mList;
     }
 
     public String getmEmail() {
@@ -31,7 +35,39 @@ public class User {
         return mProfileUrl;
     }
 
-    public ArrayList<Integer> getmList() {
+    public List<Integer> getmList() {
         return mList;
+    }
+
+    public User(Parcel in) {
+        mEmail = in.readString();
+        mName = in.readString();
+        mProfileUrl = in.readString();
+        //in.readList(this.mList,List.class.getClassLoader());
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(mEmail);
+        dest.writeString(mName);
+        dest.writeString(mProfileUrl);
+        //dest.writeList(mList);
     }
 }
