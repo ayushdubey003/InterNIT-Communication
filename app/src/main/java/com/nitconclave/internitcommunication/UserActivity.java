@@ -19,7 +19,7 @@ public class UserActivity extends AppCompatActivity {
     private ImageView mUpdateProfile;
     private Uri mImageUri;
     private ImageView mCircleBg;
-    private AutoCompleteTextView
+    private AutoCompleteTextView mAuto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class UserActivity extends AppCompatActivity {
         mUpdateProfile = findViewById(R.id.update_profile);
         mProfilePhoto = findViewById(R.id.profile_image);
         mCircleBg = findViewById(R.id.circle_bg);
+        mAuto = findViewById(R.id.auto);
 
         mUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
