@@ -1,4 +1,4 @@
-package com.nitconclave.internitcommunication;
+package com.nitconclave.internitcommunication.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +16,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
+import com.nitconclave.internitcommunication.Helpers.AppConstants;
 import com.nitconclave.internitcommunication.Models.User;
+import com.nitconclave.internitcommunication.R;
 
 public class UserActivity extends AppCompatActivity {
 

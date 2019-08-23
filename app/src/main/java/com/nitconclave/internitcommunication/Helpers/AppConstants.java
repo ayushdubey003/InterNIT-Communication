@@ -1,4 +1,4 @@
-package com.nitconclave.internitcommunication;
+package com.nitconclave.internitcommunication.Helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 
 import com.google.gson.Gson;
 import com.nitconclave.internitcommunication.Models.User;
+import com.nitconclave.internitcommunication.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class AppConstants {
     public final String mPrefsName = "loginDetails";
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    AppConstants(Context context) {
+    public AppConstants(Context context) {
         logos = new ArrayList<>();
         shortForms = new HashMap<>();
         nitNames = new ArrayList<>();

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/coordinator"
     android:background="@drawable/background"
-    tools:context=".SignUpActivity">
+    tools:context=".Activities.SignUpActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
