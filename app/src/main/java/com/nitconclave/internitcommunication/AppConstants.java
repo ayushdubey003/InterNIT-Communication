@@ -1,7 +1,11 @@
 package com.nitconclave.internitcommunication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,8 +15,11 @@ public class AppConstants {
     private ArrayList<Drawable> logos;
     private HashMap<String, String> shortForms;
     private ArrayList<String> nitNames;
-    private ArrayList<String > domains;
+    private ArrayList<String> domains;
+    private ArrayList<String> interests;
+    public SharedPreferences mSharedPreferences;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     AppConstants(Context context) {
         logos = new ArrayList<>();
         shortForms = new HashMap<>();
@@ -146,6 +153,8 @@ public class AppConstants {
         domains.add("nitt");
         domains.add("nituk");
         domains.add("nitw");
+
+
     }
 
     public ArrayList<Drawable> getLogos() {

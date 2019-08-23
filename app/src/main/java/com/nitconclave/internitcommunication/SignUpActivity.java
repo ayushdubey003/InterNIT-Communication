@@ -78,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+
         //Initialization
         mAppConstants = new AppConstants(this);
         mSelected = 0;
@@ -141,7 +142,7 @@ public class SignUpActivity extends AppCompatActivity {
                     mEmailError.setVisibility(View.VISIBLE);
                     return;
                 }
-                mEmail = mEmail + "@" + mDomains.get(mSelected);
+                mEmail = mEmail.toUpperCase() + "@" + mDomains.get(mSelected);
                 mEmailErr = (!TextUtils.isEmpty(charSequence) && Patterns.EMAIL_ADDRESS.matcher(charSequence).matches());
                 if (mEmailErr)
                     mEmailError.setVisibility(View.VISIBLE);
@@ -240,6 +241,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                     new User(
                                                             mEmail,
                                                             mName,
+                                                            null,
                                                             null
                                                     )
                                             ).addOnCompleteListener(new OnCompleteListener<Void>() {
