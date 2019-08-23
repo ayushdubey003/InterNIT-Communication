@@ -21,21 +21,21 @@ for div in soup.find_all('div',attrs={'class':'_5pbx userContent _3576'}):
             id = id + i
         elif i >= 'a' and i <='z':
             id = id + i
-    if type(db.child("MNNIT Allahabad").child("fest").child(id).child("priority").get().val()) == type(1):
+    if type(db.child("NIT Allahabad").child("fest").child(id).child("priority").get().val()) == type(1):
         break
     stack.append(id)
     stack.append(title)
 
-priority = db.child("MNNIT Allahabad").child("fest").child("priority").get().val()
+priority = db.child("NIT Allahabad").child("fest").child("priority").get().val()
 if type(priority) != type(1):
     priority = 1
 
 while len(stack) != 0:
     title = stack.pop()
     id = stack.pop()
-    db.child("MNNIT Allahabad").child("fest").child(id).child("title").set(title)
-    db.child("MNNIT Allahabad").child("fest").child(id).child("priority").set(priority)
-    db.child("MNNIT Allahabad").child("fest").child(id).child("url").set(url)
+    db.child("NIT Allahabad").child("fest").child(id).child("title").set(title)
+    db.child("NIT Allahabad").child("fest").child(id).child("priority").set(priority)
+    db.child("NIT Allahabad").child("fest").child(id).child("url").set(url)
     priority = priority + 1
 
-db.child("MNNIT Allahabad").child("fest").child("priority").set(priority)
+db.child("NIT Allahabad").child("fest").child("priority").set(priority)
