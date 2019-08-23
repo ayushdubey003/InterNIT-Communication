@@ -20,9 +20,13 @@ public class AppConstants {
     private HashMap<String, String> shortForms;
     private ArrayList<String> nitNames;
     private ArrayList<String> domains;
+<<<<<<< Updated upstream:app/src/main/java/com/nitconclave/internitcommunication/Helpers/AppConstants.java
     private String mSecret;
     private User mUser;
     private ArrayList<String> interests;
+=======
+    private HashMap<String, ArrayList<String>> interests;
+>>>>>>> Stashed changes:app/src/main/java/com/nitconclave/internitcommunication/AppConstants.java
     public SharedPreferences mSharedPreferences;
     public final String mPrefsName = "loginDetails";
 
@@ -32,8 +36,12 @@ public class AppConstants {
         shortForms = new HashMap<>();
         nitNames = new ArrayList<>();
         domains = new ArrayList<>();
+<<<<<<< Updated upstream:app/src/main/java/com/nitconclave/internitcommunication/Helpers/AppConstants.java
         mUser = new User();
         mSharedPreferences = context.getSharedPreferences(mPrefsName, Context.MODE_PRIVATE);
+=======
+        interests = new HashMap<>();
+>>>>>>> Stashed changes:app/src/main/java/com/nitconclave/internitcommunication/AppConstants.java
 
         logos.add(context.getDrawable(R.drawable.agartala));
         logos.add(context.getDrawable(R.drawable.allahabad));
@@ -163,6 +171,76 @@ public class AppConstants {
         domains.add("nituk");
         domains.add("nitw");
 
+        ArrayList<String> temp = new ArrayList<>();
+
+        temp.add("Ground Vehicle Systems");
+        temp.add("Manufacturing");
+        temp.add("Mechanical Design");
+        temp.add("Transportation System");
+        temp.add("System Dynamics and Control");
+        temp.add("Aerospace Engineering");
+        temp.add("Off Road Vehicle");
+        temp.add("Formula One Vehicle");
+        temp.add("Material Science");
+        interests.put("Mechanical", temp);
+        temp.clear();
+
+        temp.add("Competitive Coding");
+        temp.add("Machine Learning");
+        temp.add("Web Development");
+        temp.add("App Development");
+        temp.add("Blockchain");
+        temp.add("Software Development");
+        temp.add("JAVA");
+        temp.add("Python");
+        temp.add("C++");
+        temp.add("Microprocessor");
+        temp.add("Database Management System");
+        interests.put("Computer Science", temp);
+        temp.clear();
+
+        temp.add("Circuit Theory");
+        temp.add("Micro Electronics");
+        temp.add("VLSI");
+        temp.add("Integrated Circuits");
+        temp.add("Telecommunication");
+        temp.add("Nanotechnology");
+        temp.add("Digital Signal Processing");
+        temp.add("Analog Signal Processing");
+        temp.add("Embedded Systems");
+        interests.put("Electronics", temp);
+        temp.clear();
+
+        temp.add("Circuit Theory");
+        temp.add("Digital Signal Processing");
+        temp.add("Analog Signal Processing");
+        temp.add("Industrial Instrumentation");
+        temp.add("Power System");
+        temp.add("Microprocessor");
+        temp.add("Communication System");
+        interests.put("Electrical", temp);
+        temp.clear();
+
+        temp.add("Thermodynamics");
+        temp.add("Physics of Materials");
+        temp.add("Material Science");
+        temp.add("Extractive Metallurgy");
+        temp.add("Iron Making");
+        temp.add("X-ray Diffraction");
+        temp.add("Steel Making");
+        interests.put("Metallurgy", temp);
+        temp.clear();
+
+        temp.add("Construction");
+        temp.add("Planning and Management");
+        temp.add("Concrete Design");
+        temp.add("Structural Analysis");
+        temp.add("Geotechnical Engineering");
+        temp.add("Survey");
+        temp.add("Hydraulics");
+        temp.add("Structural Mechanics");
+        interests.put("Civil", temp);
+        temp.clear();
 
     }
 

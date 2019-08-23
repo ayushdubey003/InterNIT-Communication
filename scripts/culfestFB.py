@@ -8,19 +8,13 @@ db = firebase.database()
 
 stack = []
 
-website_url = requests.get("https://www.facebook.com/pg/fortiusteam/posts").text
+website_url = requests.get("https://www.facebook.com/pg/utk.nitjsr/posts").text
 soup = BeautifulSoup(website_url, 'lxml')
-url = "facebook.com/fortiusteam"
+url = "facebook.com/utk.nitjsr"
 
-for div in soup.find_all('div',attrs={'class':'_5_jv _58jw'}):
+for div in soup.find_all('div',attrs={'class':'text_exposed_root'}):
     title = div.text
-    temp = title[:50]
-    id = ""
-    for i in temp:
-        if i >= 'A' and i <= 'Z':
-            id = id + i
-        elif i >= 'a' and i <='z':
-            id = id + i
+    id = div['id']
     if type(db.child("NIT Jamshedpur").child("fest").child(id).child("priority").get().val()) == type(1):
         break
     stack.append(id)
