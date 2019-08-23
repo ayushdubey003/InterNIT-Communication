@@ -152,14 +152,20 @@ public class MainActivity extends AppCompatActivity {
                     mUserDetails = dataSnapshot.getValue(User.class);
                     if (mUserDetails != null) {
                         mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
-                        Intent intent = new Intent(MainActivity.this, UserActivity.class);
-//                        intent.putExtra("user", mUserDetails);
-//                        intent.putExtra("secret", secret);
-//                        Log.e(LOG_TAG, mUserDetails.getmName() + mUserDetails.getmEmail());
-                        mAppConstants.setmSecret(secret);
-                        mAppConstants.setmUser(mUserDetails);
-                        startActivity(intent);
-                        finish();
+                        if (!mUserDetails.ismInterests()) {
+                            final Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                            mUserDetails.setmInterests();
+                            mDatabaseReference.child(mCollegeName).child(secret).setValue(mUserDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    mAppConstants.setmSecret(secret);
+                                    mAppConstants.setmUser(mUserDetails);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                        } else
+                            startActivity(new Intent(MainActivity.this, DisplayActivity.class));
                     }
                 }
 
@@ -327,11 +333,17 @@ public class MainActivity extends AppCompatActivity {
                                         mLoginText.setVisibility(View.VISIBLE);
                                         if (mUserDetails != null) {
                                             mDatabaseReference.child(mCollegeName).child(secret).removeEventListener(mValueEventListener);
-                                            Intent intent = new Intent(MainActivity.this, UserActivity.class);
-                                            mAppConstants.setmSecret(secret);
-                                            mAppConstants.setmUser(mUserDetails);
-                                            startActivity(intent);
-                                            finish();
+                                            final Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                                            mUserDetails.setmInterests();
+                                            mDatabaseReference.child(mCollegeName).child(secret).setValue(mUserDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    mAppConstants.setmSecret(secret);
+                                                    mAppConstants.setmUser(mUserDetails);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            });
                                         }
                                         finish();
                                     }
