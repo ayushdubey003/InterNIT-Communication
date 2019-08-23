@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -12,6 +13,8 @@ import com.nitconclave.internitcommunication.Models.User;
 import com.nitconclave.internitcommunication.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class AppConstants {
@@ -23,6 +26,8 @@ public class AppConstants {
     private String mSecret;
     private User mUser;
     private HashMap<String, ArrayList<String>> interests;
+    private ArrayList<String> allInterests;
+    private ArrayList<String> mBranches;
 
     public SharedPreferences mSharedPreferences;
     public final String mPrefsName = "loginDetails";
@@ -36,6 +41,8 @@ public class AppConstants {
         mUser = new User();
         mSharedPreferences = context.getSharedPreferences(mPrefsName, Context.MODE_PRIVATE);
         interests = new HashMap<>();
+        mBranches = new ArrayList<>();
+        allInterests = new ArrayList<>();
 
         logos.add(context.getDrawable(R.drawable.agartala));
         logos.add(context.getDrawable(R.drawable.allahabad));
@@ -165,77 +172,79 @@ public class AppConstants {
         domains.add("nituk");
         domains.add("nitw");
 
-        ArrayList<String> temp = new ArrayList<>();
+        interests.put("Mechanical", new ArrayList<String>());
+        interests.put("Computer Science", new ArrayList<String>());
+        interests.put("Electronics", new ArrayList<String>());
+        interests.put("Electrical", new ArrayList<String>());
+        interests.put("Metallurgy", new ArrayList<String>());
+        interests.put("Civil", new ArrayList<String>());
 
-        temp.add("Ground Vehicle Systems");
-        temp.add("Manufacturing");
-        temp.add("Mechanical Design");
-        temp.add("Transportation System");
-        temp.add("System Dynamics and Control");
-        temp.add("Aerospace Engineering");
-        temp.add("Off Road Vehicle");
-        temp.add("Formula One Vehicle");
-        temp.add("Material Science");
-        interests.put("Mechanical", temp);
-        temp.clear();
+        interests.get("Mechanical").add("Ground Vehicle Systems");
+        interests.get("Mechanical").add("Manufacturing");
+        interests.get("Mechanical").add("Mechanical Design");
+        interests.get("Mechanical").add("Transportation System");
+        interests.get("Mechanical").add("System Dynamics and Control");
+        interests.get("Mechanical").add("Aerospace Engineering");
+        interests.get("Mechanical").add("Off Road Vehicle");
+        interests.get("Mechanical").add("Formula One Vehicle");
+        interests.get("Mechanical").add("Material Science");
+        mBranches.add("Mechanical");
 
-        temp.add("Competitive Coding");
-        temp.add("Machine Learning");
-        temp.add("Web Development");
-        temp.add("App Development");
-        temp.add("Blockchain");
-        temp.add("Software Development");
-        temp.add("JAVA");
-        temp.add("Python");
-        temp.add("C++");
-        temp.add("Microprocessor");
-        temp.add("Database Management System");
-        interests.put("Computer Science", temp);
-        temp.clear();
+        interests.get("Computer Science").add("Competitive Coding");
+        interests.get("Computer Science").add("Machine Learning");
+        interests.get("Computer Science").add("Web Development");
+        interests.get("Computer Science").add("App Development");
+        interests.get("Computer Science").add("Blockchain");
+        interests.get("Computer Science").add("Software Development");
+        interests.get("Computer Science").add("JAVA");
+        interests.get("Computer Science").add("Python");
+        interests.get("Computer Science").add("C++");
+        interests.get("Computer Science").add("Microprocessor");
+        interests.get("Computer Science").add("Database Management System");
+        mBranches.add("Computer Science");
 
-        temp.add("Circuit Theory");
-        temp.add("Micro Electronics");
-        temp.add("VLSI");
-        temp.add("Integrated Circuits");
-        temp.add("Telecommunication");
-        temp.add("Nanotechnology");
-        temp.add("Digital Signal Processing");
-        temp.add("Analog Signal Processing");
-        temp.add("Embedded Systems");
-        interests.put("Electronics", temp);
-        temp.clear();
 
-        temp.add("Circuit Theory");
-        temp.add("Digital Signal Processing");
-        temp.add("Analog Signal Processing");
-        temp.add("Industrial Instrumentation");
-        temp.add("Power System");
-        temp.add("Microprocessor");
-        temp.add("Communication System");
-        interests.put("Electrical", temp);
-        temp.clear();
+        interests.get("Electronics").add("Circuit Theory");
+        interests.get("Electronics").add("Micro Electronics");
+        interests.get("Electronics").add("VLSI");
+        interests.get("Electronics").add("Integrated Circuits");
+        interests.get("Electronics").add("Telecommunication");
+        interests.get("Electronics").add("Nanotechnology");
+        interests.get("Electronics").add("Digital Signal Processing");
+        interests.get("Electronics").add("Analog Signal Processing");
+        interests.get("Electronics").add("Embedded Systems");
+        mBranches.add("Electronics");
 
-        temp.add("Thermodynamics");
-        temp.add("Physics of Materials");
-        temp.add("Material Science");
-        temp.add("Extractive Metallurgy");
-        temp.add("Iron Making");
-        temp.add("X-ray Diffraction");
-        temp.add("Steel Making");
-        interests.put("Metallurgy", temp);
-        temp.clear();
+        interests.get("Electrical").add("Digital Signal Processing");
+        interests.get("Electrical").add("Analog Signal Processing");
+        interests.get("Electrical").add("Industrial Instrumentation");
+        interests.get("Electrical").add("Power System");
+        interests.get("Electrical").add("Microprocessor");
+        interests.get("Electrical").add("Communication System");
+        mBranches.add("Electrical");
 
-        temp.add("Construction");
-        temp.add("Planning and Management");
-        temp.add("Concrete Design");
-        temp.add("Structural Analysis");
-        temp.add("Geotechnical Engineering");
-        temp.add("Survey");
-        temp.add("Hydraulics");
-        temp.add("Structural Mechanics");
-        interests.put("Civil", temp);
-        temp.clear();
+        interests.get("Metallurgy").add("Thermodynamics");
+        interests.get("Metallurgy").add("Physics of Materials");
+        interests.get("Metallurgy").add("Material Science");
+        interests.get("Metallurgy").add("Extractive Metallurgy");
+        interests.get("Metallurgy").add("Iron Making");
+        interests.get("Metallurgy").add("X-ray Diffraction");
+        interests.get("Metallurgy").add("Steel Making");
+        mBranches.add("Metallurgy");
 
+        interests.get("Civil").add("Construction");
+        interests.get("Civil").add("Planning and Management");
+        interests.get("Civil").add("Concrete Design");
+        interests.get("Civil").add("Structural Analysis");
+        interests.get("Civil").add("Geotechnical Engineering");
+        interests.get("Civil").add("Survey");
+        interests.get("Civil").add("Hydraulics");
+        interests.get("Civil").add("Structural Mechanics");
+        mBranches.add("Civil");
+
+        for (int i = 0; i < mBranches.size(); i++) {
+            allInterests.addAll(interests.get(mBranches.get(i)));
+        }
     }
 
     public ArrayList<Drawable> getLogos() {
@@ -280,5 +289,23 @@ public class AppConstants {
         String json = mSharedPreferences.getString("User", "");
         mUser = gson.fromJson(json, User.class);
         return mUser;
+    }
+
+    public HashMap<String, ArrayList<String>> getInterests() {
+        return interests;
+    }
+
+    public ArrayList<String> getmBranches() {
+        return mBranches;
+    }
+
+    public ArrayList<String> getAllInterests() {
+        return allInterests;
+    }
+
+    public ArrayList<String> getSortedInterests() {
+        ArrayList<String> temp = allInterests;
+        Collections.sort(temp);
+        return temp;
     }
 }

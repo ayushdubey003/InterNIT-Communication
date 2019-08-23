@@ -1,26 +1,26 @@
 package com.nitconclave.internitcommunication.Models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Parcelable {
+public class User {
     private String mEmail;
     private String mName;
     private String mProfileUrl;
-    private List<Integer> mList=new ArrayList<>();
+    private List<String> mList = new ArrayList<>();
+    private boolean mInterests;
 
     public User() {
 
     }
 
-    public User(String mEmail, String mName, String mProfileUrl, ArrayList<Integer> mList) {
+    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
-        //this.mList = mList;
+        this.mList = mList;
+        this.mInterests = mInterests;
     }
 
     public String getmEmail() {
@@ -35,39 +35,35 @@ public class User implements Parcelable {
         return mProfileUrl;
     }
 
-    public List<Integer> getmList() {
+    public List<String> getmList() {
         return mList;
     }
 
-    public User(Parcel in) {
-        mEmail = in.readString();
-        mName = in.readString();
-        mProfileUrl = in.readString();
-        //in.readList(this.mList,List.class.getClassLoader());
+    public boolean ismInterests() {
+        return mInterests;
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return hashCode();
+    public void setmInterests() {
+        mInterests = true;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(mEmail);
-        dest.writeString(mName);
-        dest.writeString(mProfileUrl);
-        //dest.writeList(mList);
+    public void setmEmail(String mEmail) {
+        this.mEmail = mEmail;
+    }
+
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
+    public void setmProfileUrl(String mProfileUrl) {
+        this.mProfileUrl = mProfileUrl;
+    }
+
+    public void setmList(List<String> mList) {
+        this.mList = mList;
+    }
+
+    public void setmInterests(boolean mInterests) {
+        this.mInterests = mInterests;
     }
 }

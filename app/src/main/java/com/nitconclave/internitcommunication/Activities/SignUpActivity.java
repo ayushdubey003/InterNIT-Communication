@@ -1,11 +1,13 @@
 package com.nitconclave.internitcommunication.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -70,6 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
     private boolean mPasswordErr;
     private boolean mConfirmErr;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -238,7 +241,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                             mEmail,
                                                             mName,
                                                             null,
-                                                            null
+                                                            null,
+                                                            false
                                                     )
                                             ).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
