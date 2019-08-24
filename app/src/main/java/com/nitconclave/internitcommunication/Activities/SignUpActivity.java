@@ -247,7 +247,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             ).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    mFirebaseUser = null;
+                                                    mAuth.signOut();
                                                     if (!task.isSuccessful()) {
                                                         Snackbar.make(mCoordinator, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
                                                         mButtonText.setVisibility(View.VISIBLE);
