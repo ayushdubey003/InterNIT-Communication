@@ -1,6 +1,8 @@
 package com.nitconclave.internitcommunication.Models;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,19 +12,24 @@ public class User {
     private String mProfileUrl;
     private List<String> mList = new ArrayList<>();
     private boolean mInterests;
-    private List<String> mRecommendations = new ArrayList<>();
+    private List<String> recommendation = new ArrayList<>();
 
     public User() {
 
     }
 
-    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests, ArrayList<String> mRecommendations) {
+    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests, ArrayList<String> recommendation) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
         this.mList = mList;
         this.mInterests = mInterests;
-        this.mRecommendations = mRecommendations;
+        this.recommendation = recommendation;
+        try {
+            Log.e("User", recommendation.size() + "");
+        } catch (Exception e) {
+            Log.e("User", "" + e);
+        }
     }
 
     public String getmEmail() {
@@ -70,10 +77,10 @@ public class User {
     }
 
     public List<String> getmRecommendations() {
-        return mRecommendations;
+        return recommendation;
     }
 
-    public void setmRecommendations(List<String> mRecommendations) {
-        this.mRecommendations = mRecommendations;
+    public void setmRecommendations(List<String> recommendation) {
+        this.recommendation = recommendation;
     }
 }

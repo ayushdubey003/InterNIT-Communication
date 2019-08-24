@@ -367,6 +367,7 @@ public class MainActivity extends AppCompatActivity {
                                         if (!mUserDetails.ismInterests()) {
                                             final Intent intent = new Intent(MainActivity.this, UserActivity.class);
                                             mUserDetails.setmInterests();
+                                            mAppConstants.setmUser(mUserDetails);
                                             mDatabaseReference.child(mCollegeName).child(secret).setValue(mUserDetails).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -376,8 +377,11 @@ public class MainActivity extends AppCompatActivity {
                                                     finish();
                                                 }
                                             });
-                                        } else
+                                        } else {
+                                            mAppConstants.setmSecret(secret);
+                                            mAppConstants.setmUser(mUserDetails);
                                             startActivity(new Intent(MainActivity.this, DisplayActivity.class));
+                                        }
                                     }
                                 }
                             });

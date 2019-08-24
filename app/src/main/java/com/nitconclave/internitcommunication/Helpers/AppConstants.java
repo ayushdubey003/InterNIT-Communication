@@ -267,7 +267,7 @@ public class AppConstants {
         this.mSecret = mSecret;
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString("UserSecret", mSecret);
-        editor.apply();
+        editor.commit();
     }
 
     public void setmUser(User mUser) {
@@ -276,7 +276,7 @@ public class AppConstants {
         Gson gson = new Gson();
         String json = gson.toJson(mUser);
         editor.putString("User", json);
-        editor.apply();
+        editor.commit();
     }
 
     public String getmSecret() {

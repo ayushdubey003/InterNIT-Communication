@@ -104,7 +104,6 @@ public class ProfileFragment extends Fragment {
             mBin.setVisibility(View.GONE);
         } else {
             mBin.setVisibility(View.VISIBLE);
-            Log.e("fragment", mUser.getmProfileUrl());
             Glide.with(this)
                     .load(mUser.getmProfileUrl())
                     .into(mProfilePhoto);

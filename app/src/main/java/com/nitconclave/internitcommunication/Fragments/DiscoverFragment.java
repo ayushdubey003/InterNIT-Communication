@@ -2,11 +2,14 @@ package com.nitconclave.internitcommunication.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,8 +34,6 @@ public class DiscoverFragment extends Fragment {
     private AppConstants mAppConstants;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseReference;
-    private FirebaseAuth mAuth;
-    private FirebaseUser mUser;
     private User mUserDetails;
     private ValueEventListener mValueEventListener;
 
@@ -40,29 +41,35 @@ public class DiscoverFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover, container, false);
-        mDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mDatabase.getReference("users");
-        mDatabaseReference.child(mAppConstants.getmSecret()).addValueEventListener(mValueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUserDetails = dataSnapshot.getValue(User.class);
-                mAppConstants.setmUser(mUserDetails);
-                String college = mAppConstants.getCollege();
-                mAppConstants.setmUser(mUserDetails);
-                mDatabaseReference.child(college).child(mAppConstants.getmSecret()).removeEventListener(mValueEventListener);
-                List<String> arrayList = mUserDetails.getmRecommendations();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+//        mAppConstants = new AppConstants(getContext());
+//        mDatabase = FirebaseDatabase.getInstance();
+//        mDatabaseReference = mDatabase.getReference("users");
+//        mUserDetails = mAppConstants.getmUser();
+//
+//        mDatabaseReference.child(mAppConstants.getCollege()).child(mAppConstants.getmSecret()).addValueEventListener(mValueEventListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                Log.e("Hey", mAppConstants.getmSecret());
+//                mUserDetails = dataSnapshot.getValue(User.class);
+//                mAppConstants.setmUser(mUserDetails);
+//                List<String> arrayList = mUserDetails.getmRecommendations();
+//                Log.e("frag", arrayList.size() + "");
+//                for (int j = 0; j < arrayList.size(); j++)
+//                    Log.e("Frag", arrayList.get(j) + "\n");
+//                mDatabaseReference.child(mAppConstants.getCollege()).child(mAppConstants.getmSecret()).removeEventListener(mValueEventListener);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
         return view;
     }
 }
