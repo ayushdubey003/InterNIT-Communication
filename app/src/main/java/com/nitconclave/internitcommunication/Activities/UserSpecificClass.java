@@ -36,12 +36,12 @@ public class UserSpecificClass extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance();
         mDatabaseReference = mDatabase.getReference();
 
-        mDatabaseReference.child(mValue).child(mKey).addValueEventListener(mValueEventListener = new ValueEventListener() {
+        Log.e(LOG_TAG, mKey + mValue);
+        mDatabaseReference.child("users").child(mValue).child(mKey).addValueEventListener(mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 mDatabaseReference.child(mValue).child(mKey).removeEventListener(mValueEventListener);
-                Log.e(LOG_TAG, user.getmName() + " " + user.getRecommendation().size() + " " + user.getUserRec().size());
             }
 
             @Override
