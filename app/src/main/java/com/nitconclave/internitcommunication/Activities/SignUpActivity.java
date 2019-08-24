@@ -242,7 +242,8 @@ public class SignUpActivity extends AppCompatActivity {
                                                             mName,
                                                             null,
                                                             null,
-                                                            false
+                                                            false,
+                                                            null
                                                     )
                                             ).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
