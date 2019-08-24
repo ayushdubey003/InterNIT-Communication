@@ -91,7 +91,12 @@ public class MessageActivity extends AppCompatActivity {
         appConstants = new AppConstants(MessageActivity.this);
         User mUser = appConstants.getmUser();
         userName = mUser.getmName();
-        databaseReference = FirebaseDatabase.getInstance().getReference();
+        if(uid.equals("Notice")){
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("NIT Jamshedpur");
+            uid = "notice";
+        }
+        else
+            databaseReference = FirebaseDatabase.getInstance().getReference();
 
         populateMessage();
 

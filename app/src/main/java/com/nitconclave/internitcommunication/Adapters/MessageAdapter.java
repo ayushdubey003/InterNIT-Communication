@@ -92,6 +92,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         else
             viewHolder.textView.setText(null);
 
+        viewHolder.user.setText(messageModels.get(i).getUserName());
+
         Date date = messageModels.get(i).getDate();
         SimpleDateFormat formatter = new SimpleDateFormat("MMM dd, hh:mm a");
         String strDate = formatter.format(date);
@@ -107,10 +109,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         private ImageView imageView;
         private TextView textView;
         private TextView dateView;
+        private TextView user;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image);
+            user = itemView.findViewById(R.id.user);
             textView = itemView.findViewById(R.id.text);
             dateView = itemView.findViewById(R.id.time);
         }
