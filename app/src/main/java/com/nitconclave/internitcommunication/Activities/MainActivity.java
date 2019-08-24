@@ -195,8 +195,10 @@ public class MainActivity extends AppCompatActivity {
                                     finish();
                                 }
                             });
-                        } else
+                        } else {
+                            mAppConstants.setmUser(mUserDetails);
                             startActivity(new Intent(MainActivity.this, DisplayActivity.class));
+                        }
                     }
                 }
 

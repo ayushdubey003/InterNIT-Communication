@@ -274,6 +274,7 @@ public class UserActivity extends AppCompatActivity {
                 task.addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        mAppConstants.setmUser(mUser);
                         startActivity(new Intent(UserActivity.this, DisplayActivity.class));
                         finish();
                     }
