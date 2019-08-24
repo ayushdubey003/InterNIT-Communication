@@ -3,12 +3,15 @@ package com.nitconclave.internitcommunication.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +37,8 @@ public class UserSpecificClass extends AppCompatActivity {
     private TextView mName;
     private TextView mCollegeName;
     private GridView mGrid;
+    private FloatingActionButton fab;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +50,14 @@ public class UserSpecificClass extends AppCompatActivity {
         mDatabaseReference = mDatabase.getReference();
         mName = findViewById(R.id.name);
         mGrid = findViewById(R.id.grid);
+        fab = findViewById(R.id.message);
         mCollegeName = findViewById(R.id.college);
 
         Log.e(LOG_TAG, mKey + mValue);
         mDatabaseReference.child("users").child(mValue).child(mKey).addValueEventListener(mValueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
+                user = dataSnapshot.getValue(User.class);
                 mDatabaseReference.child(mValue).child(mKey).removeEventListener(mValueEventListener);
                 mName.setText(user.getmName());
                 String collegeName = "National Institute of Technology ";
@@ -67,6 +73,17 @@ public class UserSpecificClass extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String value = user.getmName();
+                Intent intent = new Intent(UserSpecificClass.this, MessageActivity.class);
+                intent.putExtra("title", value);
+                intent.putExtra("uid", mKey);
+                startActivity(intent);
             }
         });
     }
