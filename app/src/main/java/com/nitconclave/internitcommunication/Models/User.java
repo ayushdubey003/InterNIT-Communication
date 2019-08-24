@@ -10,17 +10,19 @@ public class User {
     private String mProfileUrl;
     private List<String> mList = new ArrayList<>();
     private boolean mInterests;
+    private List<String> mRecommendations = new ArrayList<>();
 
     public User() {
 
     }
 
-    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests) {
+    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests, ArrayList<String> mRecommendations) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
         this.mList = mList;
         this.mInterests = mInterests;
+        this.mRecommendations = mRecommendations;
     }
 
     public String getmEmail() {
@@ -65,5 +67,13 @@ public class User {
 
     public void setmInterests(boolean mInterests) {
         this.mInterests = mInterests;
+    }
+
+    public List<String> getmRecommendations() {
+        return mRecommendations;
+    }
+
+    public void setmRecommendations(List<String> mRecommendations) {
+        this.mRecommendations = mRecommendations;
     }
 }
