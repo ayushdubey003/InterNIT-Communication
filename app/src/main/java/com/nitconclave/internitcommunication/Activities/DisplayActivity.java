@@ -21,6 +21,7 @@ import com.nitconclave.internitcommunication.Fragments.ChannelFragment;
 import com.nitconclave.internitcommunication.Fragments.DiscoverFragment;
 import com.nitconclave.internitcommunication.Fragments.ProfileFragment;
 import com.nitconclave.internitcommunication.Helpers.AppConstants;
+import com.nitconclave.internitcommunication.Models.User;
 import com.nitconclave.internitcommunication.R;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class DisplayActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private static final int number_of_tabs = 3;
     private TextView tabs[];
+    private AppConstants mAppConstants;
+    private User mUser;
+    private String mSecret;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -41,9 +45,11 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
         imageView = findViewById(R.id.image);
-        AppConstants mAppConstants = new AppConstants(this);
+        mAppConstants = new AppConstants(this);
         mLogos = mAppConstants.getLogos();
         currIndex = 0;
+        mUser = mAppConstants.getmUser();
+        mSecret = mAppConstants.getmSecret();
 
         updateLogo();
         init();
@@ -62,7 +68,7 @@ public class DisplayActivity extends AppCompatActivity {
         }, 2500);
     }
 
-    private void init(){
+    private void init() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager.setOffscreenPageLimit(3);

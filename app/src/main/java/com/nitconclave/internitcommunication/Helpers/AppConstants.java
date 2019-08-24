@@ -308,4 +308,18 @@ public class AppConstants {
         Collections.sort(temp);
         return temp;
     }
+
+    public String getCollege() {
+        String email = mUser.getmEmail();
+        String val[] = email.split("\\@");
+        String x[] = val[1].split("\\.");
+        int co = 0;
+        for (int j = 0; j < getDomains().size(); j++) {
+            if (x[0].equalsIgnoreCase(getDomains().get(j))) {
+                co = j;
+                break;
+            }
+        }
+        return getNitNames().get(co);
+    }
 }

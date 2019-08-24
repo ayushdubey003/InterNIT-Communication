@@ -26,4 +26,5 @@ public class ChannelFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_channel, container, false);
         return view;
     }
+
 }
