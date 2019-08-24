@@ -30,6 +30,7 @@ while len(stack) != 0:
     db.child("NIT Jamshedpur").child("fest").child(id).child("title").set(title)
     db.child("NIT Jamshedpur").child("fest").child(id).child("priority").set(priority)
     db.child("NIT Jamshedpur").child("fest").child(id).child("url").set(url)
+    db.child("NIT Jamshedpur").child("fest").child(id).child("name").set("Culfest")
     priority = priority + 1
 
 db.child("NIT Jamshedpur").child("fest").child("priority").set(priority)
