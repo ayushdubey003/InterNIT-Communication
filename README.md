@@ -19,6 +19,7 @@ Inter-NIT Communication platform
 
 ### Libraries
 - Glide
+- CircularImageView
 - Gson
 - BeautifulSoup
 - Pyrebase
@@ -27,4 +28,5 @@ Inter-NIT Communication platform
 ### Tools and Technologies
 - Android Studio
 - Atom Text Editor
+- Git & Github
 
