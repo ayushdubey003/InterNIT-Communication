@@ -35,8 +35,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.nitconclave.internitcommunication.Adapters.MessageAdapter;
+import com.nitconclave.internitcommunication.Adapters.NoticeAdapter;
 import com.nitconclave.internitcommunication.Helpers.AppConstants;
 import com.nitconclave.internitcommunication.Models.MessageModel;
+import com.nitconclave.internitcommunication.Models.Notice;
 import com.nitconclave.internitcommunication.Models.User;
 import com.nitconclave.internitcommunication.R;
 
@@ -59,9 +61,10 @@ public class MessageActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private ArrayList<MessageModel> messageModels;
+    private ArrayList<Notice> noticeModels;
     private DatabaseReference databaseReference;
     private MessageAdapter messageAdapter;
-    private AppConstants appConstants;
+    private NoticeAdapter noticeAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -87,47 +90,77 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(MessageActivity.this));
 
         messageModels = new ArrayList<>();
+        noticeModels = new ArrayList<>();
         userUid = FirebaseAuth.getInstance().getUid();
-        appConstants = new AppConstants(MessageActivity.this);
-        User mUser = appConstants.getmUser();
-        userName = mUser.getmName();
+        userName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         if(uid.equals("Notice")){
             databaseReference = FirebaseDatabase.getInstance().getReference().child("NIT Jamshedpur");
-            uid = "notice";
+            databaseReference.child("notice").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot data: dataSnapshot.getChildren()){
+                        try{
+                            Notice notice = data.getValue(Notice.class);
+                            assert notice != null;
+                            noticeModels.add(notice);
+                        }
+                        catch (Exception e){
+                            continue;
+                        }
+
+                    }
+                    Collections.sort(noticeModels, new Comparator<Notice>() {
+                        @Override
+                        public int compare(Notice o1, Notice o2) {
+                            return o1.getPriority() - o2.getPriority();
+                        }
+                    });
+                    noticeAdapter = new NoticeAdapter(noticeModels);
+                    recyclerView.setAdapter(noticeAdapter);
+                    recyclerView.scrollToPosition(noticeAdapter.getItemCount() - 1);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            progressBar.setVisibility(View.INVISIBLE);
         }
-        else
+        else {
             databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        populateMessage();
+            populateMessage();
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage();
-            }
-        });
-
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String message = messageEdit.getText().toString().trim();
-                if(!message.equals("")){
-                    messageEdit.setText("");
-                    Random random =  new Random();
-                    long rand = random.nextLong();
-                    String randomString = Long.toString(rand);
-                    Date date = new Date();
-                    MessageModel messageModel= new MessageModel(userName, message, null, date);
-                    databaseReference.child(uid).child("message").child(randomString).setValue(messageModel);
-//                    databaseReference.child(uid).child("notify").child(userUid).child("notify").setValue(true);
-//                    databaseReference.child(uid).child("notify").child(userUid).child("userName").setValue(userName);
-                    messageModel.setSender(true);
-                    messageModels.add(messageModel);
-                    messageAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
+            addButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chooseImage();
                 }
-            }
-        });
+            });
+
+            sendButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String message = messageEdit.getText().toString().trim();
+                    if (!message.equals("")) {
+                        messageEdit.setText("");
+                        Random random = new Random();
+                        long rand = random.nextLong();
+                        String randomString = Long.toString(rand);
+                        Date date = new Date();
+                        MessageModel messageModel = new MessageModel(userName, message, null, date);
+                        databaseReference.child(uid).child("message").child(randomString).setValue(messageModel);
+                        //                    databaseReference.child(uid).child("notify").child(userUid).child("notify").setValue(true);
+                        //                    databaseReference.child(uid).child("notify").child(userUid).child("userName").setValue(userName);
+                        messageModel.setSender(true);
+                        messageModels.add(messageModel);
+                        messageAdapter.notifyDataSetChanged();
+                        recyclerView.scrollToPosition(messageAdapter.getItemCount() - 1);
+                    }
+                }
+            });
+        }
     }
 
     private void populateMessage() {
