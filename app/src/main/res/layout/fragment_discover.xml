@@ -7,15 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".Activities.DisplayActivity">
 
-    <ListView
-        android:id="@+id/list"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/background"
+            android:fontFamily="@font/ptsans"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="User recommendations based on your interests"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text"></ListView>
+    </RelativeLayout>
 
     <ProgressBar
+        android:id="@+id/progress_circular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/progress_circular"/>
+        android:layout_gravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

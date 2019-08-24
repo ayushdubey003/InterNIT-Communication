@@ -198,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             mAppConstants.setmUser(mUserDetails);
                             startActivity(new Intent(MainActivity.this, DisplayActivity.class));
+                            finish();
                         }
                     }
                 }
@@ -381,6 +382,7 @@ public class MainActivity extends AppCompatActivity {
                                             mAppConstants.setmSecret(secret);
                                             mAppConstants.setmUser(mUserDetails);
                                             startActivity(new Intent(MainActivity.this, DisplayActivity.class));
+                                            finish();
                                         }
                                     }
                                 }

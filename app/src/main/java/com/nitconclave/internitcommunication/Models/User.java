@@ -4,6 +4,7 @@ package com.nitconclave.internitcommunication.Models;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class User {
@@ -13,23 +14,36 @@ public class User {
     private List<String> mList = new ArrayList<>();
     private boolean mInterests;
     private List<String> recommendation = new ArrayList<>();
+    private HashMap<String, String> userRec = new HashMap<>();
 
     public User() {
 
     }
 
-    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests, ArrayList<String> recommendation) {
+    public User(String mEmail, String mName, String mProfileUrl, ArrayList<String> mList, boolean mInterests, ArrayList<String> recommendation,HashMap<String, String> userRec) {
         this.mEmail = mEmail;
         this.mName = mName;
         this.mProfileUrl = mProfileUrl;
         this.mList = mList;
         this.mInterests = mInterests;
         this.recommendation = recommendation;
-        try {
-            Log.e("User", recommendation.size() + "");
-        } catch (Exception e) {
-            Log.e("User", "" + e);
-        }
+        this.userRec=userRec;
+    }
+
+    public List<String> getRecommendation() {
+        return recommendation;
+    }
+
+    public void setRecommendation(List<String> recommendation) {
+        this.recommendation = recommendation;
+    }
+
+    public HashMap<String, String> getUserRec() {
+        return userRec;
+    }
+
+    public void setUserRec(HashMap<String, String> userRec) {
+        this.userRec = userRec;
     }
 
     public String getmEmail() {

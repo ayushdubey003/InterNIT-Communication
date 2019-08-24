@@ -243,6 +243,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                             null,
                                                             null,
                                                             false,
+                                                            null,
                                                             null
                                                     )
                                             ).addOnCompleteListener(new OnCompleteListener<Void>() {
