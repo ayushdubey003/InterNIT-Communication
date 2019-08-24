@@ -15,12 +15,14 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.DisplayActivity"/>
+        <activity android:name=".Activities.MessageActivity"></activity>
+        <activity android:name=".Activities.DisplayActivity" />
         <activity android:name=".Activities.UserActivity" />
         <activity android:name=".Activities.SignUpActivity" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

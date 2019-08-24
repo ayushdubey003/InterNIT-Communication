@@ -28,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nitconclave.internitcommunication.Helpers.AppConstants;
@@ -250,6 +251,12 @@ public class SignUpActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     mAuth.signOut();
                                                     if (!task.isSuccessful()) {
+                                                        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                                                        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                                                                .setDisplayName(mName)
+                                                                .build();
+                                                        firebaseUser.updateProfile(request);
+
                                                         Snackbar.make(mCoordinator, task.getException().getLocalizedMessage(), Snackbar.LENGTH_LONG).show();
                                                         mButtonText.setVisibility(View.VISIBLE);
                                                         mButton.setEnabled(true);
