@@ -126,6 +126,9 @@ public class MessageActivity extends AppCompatActivity {
                 }
             });
             progressBar.setVisibility(View.INVISIBLE);
+            addButton.setEnabled(false);
+            messageEdit.setEnabled(false);
+            sendButton.setEnabled(false);
         }
         else {
             databaseReference = FirebaseDatabase.getInstance().getReference();

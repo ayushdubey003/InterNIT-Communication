@@ -91,7 +91,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             viewHolder.textView.setText(messageModels.get(i).getMessage());
         else
             viewHolder.textView.setText(null);
-
+        if(messageModels.get(i).getUserName() != null)
         viewHolder.user.setText(messageModels.get(i).getUserName());
 
         Date date = messageModels.get(i).getDate();
