@@ -38,6 +38,8 @@ public class DisplayActivity extends AppCompatActivity {
     private AppConstants mAppConstants;
     private User mUser;
     private String mSecret;
+    private ImageView mBin;
+    private TextView mClear;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
