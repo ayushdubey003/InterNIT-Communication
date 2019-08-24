@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.UserSpecificClass"></activity>
+        <activity android:name=".Activities.MessageActivity"></activity>
         <activity android:name=".Activities.DisplayActivity" />
         <activity android:name=".Activities.UserActivity" />
         <activity android:name=".Activities.SignUpActivity" />
